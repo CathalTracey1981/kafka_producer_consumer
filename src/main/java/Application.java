@@ -13,10 +13,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+import static properties.KafkaProperties.*;
+
 public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
-
-    private final String TOPIC = "PLAYER.TOPIC";
 
     public static void main(String[] args) throws ExecutionException, InterruptedException, IOException {
         logger.info("Starting application....");
@@ -33,11 +33,11 @@ public class Application {
         Producer<String, Player> producer = PlayerProducer.createProducer();
         Player player;
         logger.info("Reading players from file");
-        BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/players.csv"));
+        BufferedReader reader = new BufferedReader(new FileReader(PLAYERS_CSV_PATH));
         String line;
         logger.info("Publishing players to kafka");
         while ((line = reader.readLine()) != null) {
-            String[] values = line.split("\\s*,\\s*");
+            String[] values = line.split(SPLIT_REGEX);
             player = getPlayer(values);
 
             writeRecordToKafkaTopic(producer, player);
