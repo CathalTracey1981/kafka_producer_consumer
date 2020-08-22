@@ -1,0 +1,11 @@
+{
+    "type":"record",
+    "name":"Player",
+    "namespace":"player",
+    "fields": [
+        {"name":"firstname","type":"string"},
+        {"name":"lastname","type":"string"},
+        {"name":"team","type":"string"},
+        {"name":"position","type":"string"}
+    ]
+}
