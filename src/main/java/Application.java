@@ -20,8 +20,7 @@ public class Application {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException, IOException {
         logger.info("Starting application....");
-        Application application = new Application();
-        application.start();
+        new Application().start();
     }
 
     private void start() throws InterruptedException, ExecutionException, IOException {
@@ -39,7 +38,6 @@ public class Application {
         while ((line = reader.readLine()) != null) {
             String[] values = line.split(SPLIT_REGEX);
             player = getPlayer(values);
-
             writeRecordToKafkaTopic(producer, player);
         }
         reader.close();
